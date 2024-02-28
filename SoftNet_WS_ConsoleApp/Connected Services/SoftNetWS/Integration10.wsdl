@@ -1,0 +1,3499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:tns="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura ve e-Arsiv icin ortak yontemlerle kullanilmak uzere tasarlanmis web servis uygulamasi (ver 1.0)</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetFullUserList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullUserListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFullUserListResult" type="tns:ArrayOfEInvoiceEnabledCompany" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEInvoiceEnabledCompany">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EInvoiceEnabledCompany" nillable="true" type="tns:EInvoiceEnabledCompany" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EInvoiceEnabledCompany">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TaxNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GIBRegisterDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdateDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Alias" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxPayerType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordStatus" type="tns:RURecordStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RURecordStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="All" />
+          <s:enumeration value="Inserted" />
+          <s:enumeration value="Deleted" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SearchUserList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sulo" type="tns:SearchUserListOption" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SearchUserListOption">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StartDateTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDateTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordStatus" type="tns:RURecordStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchUserListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUserListResult" type="tns:ArrayOfEInvoiceEnabledCompany" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByTaxId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taxId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByTaxIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserInfoByTaxIdResult" type="tns:ArrayOfEInvoiceEnabledCompany" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserInfoByTaxId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taxId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserInfoByTaxIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckUserInfoByTaxIdResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyPostBoxList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeDeleted" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyPostBoxListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyPostBoxListResult" type="tns:ArrayOfCompanyInformation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCompanyInformation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyInformation" nillable="true" type="tns:CompanyInformation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyInformation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TaxNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FirstCreationTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EPostBoxDetails" type="tns:ArrayOfEPostBoxDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEPostBoxDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EPostBoxDetail" nillable="true" type="tns:EPostBoxDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EPostBoxDetail">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Alias" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreationTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Deleted" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeletionTime" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInvoiceHtmlByUUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="invoiceUUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoiceHtmlByUUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoiceHtmlByUUIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommonDocumentHtmlByUUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="documentUUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommonDocumentHtmlByUUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCommonDocumentHtmlByUUIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoiceSignedXmlByUUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="invoiceUUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoiceSignedXmlByUUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoiceSignedXmlByUUIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommonDocumentSignedXmlByUUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="documentUUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommonDocumentSignedXmlByUUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCommonDocumentSignedXmlByUUIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckInvoice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="invoice" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="NetleEFatura">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NetleBelge" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NetleBelge" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="No" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPFatNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BarkodUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Aciklama" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DuzenlenmeTarihi" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tip" type="tns:NetleEFaturaType" />
+          <s:element minOccurs="1" maxOccurs="1" name="Senaryo" type="tns:NetleEFaturaSenaryoType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiparisNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiparisTarihi" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="IrsaliyeNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IrsaliyeTarihi" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ToplamTutar" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OdenecekToplamTutar" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DovizTipi" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IskontoTutari" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="VergilendirilecekToplamTutar" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="YuvarlamaTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="VergiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="KKDFKesintiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KKDFKesintiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="PetrolDogalgazOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PetrolDogalgazOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DayanikliTuketimOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DayanikliTuketimOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="AlkolluIcecekOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AlkolluIcecekOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TutunMamulleriOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TutunMamulleriOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="KolaliGazozOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KolaliGazozOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DVKanun5035MuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVKanun5035Tutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="OIVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="OIVKanun5035MuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVKanun5035Tutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDVTevkifatMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVTevkifatTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BSMVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BSMVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="MotorluTasitlarOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MotorluTasitlarOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BorsaTescilUcretMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BorsaTescilUcretTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnerjiFonuMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnerjiFonuTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BelediyeTuketimVergisiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BelediyeTuketimVergisiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TRTPayiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TRTPayiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElektrikTuketimVergisiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ElektrikTuketimVergisiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="StopajMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StopajTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TelsizKullanimAylikTaksitMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizKullanimAylikTaksitTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TelsizRuhsatUcretiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizRuhsatUcretiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CevreTemizlikVergisiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CevreTemizlikVergisiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="XsltPath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ToplamTutarDovizTipi" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ToplamTutarDovizKuru" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="OdemeDovizTipi" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OdemeDovizKuru" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tedarikci" type="tns:Tedarikci" />
+          <s:element minOccurs="0" maxOccurs="1" name="Musteri" type="tns:Musteri" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaturaKalemleri" type="tns:ArrayOfFaturaKalemi" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vergiler" type="tns:ArrayOfVergi" />
+          <s:element minOccurs="0" maxOccurs="1" name="EkSahalar" type="tns:ArrayOfEkSaha" />
+          <s:element minOccurs="0" maxOccurs="1" name="EkAciklamalar" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="ArtirimTutari" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="VergilerDahilTutar" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="VergilerHaricTutar" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Irsaliyeler" type="tns:ArrayOfIrsaliye" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KKDFKesintiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PetrolDogalgazOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DayanikliTuketimOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="AlkolluIcecekOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TutunMamulleriOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KolaliGazozOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVKanun5035Matrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVKanun5035Matrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVTevkifatMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BSMVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="MotorluTasitlarOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BorsaTescilUcretMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnerjiFonuMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BelediyeTuketimVergisiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TRTPayiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ElektrikTuketimVergisiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="StopajMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizKullanimAylikTaksitMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizRuhsatUcretiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CevreTemizlikVergisiMatrahi" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="VergiTemsilcisi" type="tns:VergiTemsilcisi" />
+          <s:element minOccurs="0" maxOccurs="1" name="SaticiTedarikcisi" type="tns:SaticiTedarikcisi" />
+          <s:element minOccurs="0" maxOccurs="1" name="AliciMusteri" type="tns:AliciMusteri" />
+          <s:element minOccurs="0" maxOccurs="1" name="SaticiSiparisNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiparisTuruKodu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OKCBilgiFisleri" type="tns:ArrayOfOKCBilgiFisi" />
+          <s:element minOccurs="1" maxOccurs="1" name="KaynakDokumanTuru" type="tns:KaynakDokumanTuru" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gonderi" type="tns:Gonderi" />
+          <s:element minOccurs="0" maxOccurs="1" name="SevkIrsaliye" type="tns:SevkIrsaliye" />
+          <s:element minOccurs="0" maxOccurs="1" name="SGKOzelFaturaAlanlari" type="tns:SGKOzelFaturaAlanlari" />
+          <s:element minOccurs="1" maxOccurs="1" name="GonderimTipi" type="tns:GonderimTipi" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="NetleEFaturaType">
+        <s:restriction base="s:string">
+          <s:enumeration value="SATIS" />
+          <s:enumeration value="IADE" />
+          <s:enumeration value="TEVKIFAT" />
+          <s:enumeration value="ISTISNA" />
+          <s:enumeration value="OZELMATRAH" />
+          <s:enumeration value="IHRACKAYITLI" />
+          <s:enumeration value="SEVK" />
+          <s:enumeration value="SGK" />
+          <s:enumeration value="MATBUDAN" />
+          <s:enumeration value="KOMISYONCU" />
+          <s:enumeration value="HKSSATIS" />
+          <s:enumeration value="HKSKOMISYONCU" />
+          <s:enumeration value="TEVKIFATIADE" />
+          <s:enumeration value="ILAC_TIBBICIHAZ" />
+          <s:enumeration value="SATISIPTALIADE" />
+          <s:enumeration value="DOVIZALIMBELGESI" />
+          <s:enumeration value="DOVIZSATIMBELGESI" />
+          <s:enumeration value="ADISYON" />
+          <s:enumeration value="KONAKLAMAVERGISI" />
+          <s:enumeration value="SARJ" />
+          <s:enumeration value="SARJANLIK" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="NetleEFaturaSenaryoType">
+        <s:restriction base="s:string">
+          <s:enumeration value="TEMELFATURA" />
+          <s:enumeration value="TICARIFATURA" />
+          <s:enumeration value="YOLCUBERABERFATURA" />
+          <s:enumeration value="IHRACAT" />
+          <s:enumeration value="TEMELIRSALIYE" />
+          <s:enumeration value="EARSIVFATURA" />
+          <s:enumeration value="EARSIVBELGE" />
+          <s:enumeration value="OZELFATURA" />
+          <s:enumeration value="KAMU" />
+          <s:enumeration value="HKS" />
+          <s:enumeration value="STDKODFATURA" />
+          <s:enumeration value="EDOVIZBELGE" />
+          <s:enumeration value="HKSIRSALIYE" />
+          <s:enumeration value="ENERJI" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Tedarikci">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Taraf" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Taraf">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FirmaAdi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sokak" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BinaAdi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KapiNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IlceSemt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Il" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ulke" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostaKodu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VergiDairesi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VergiNoTCKimlikNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WebAdresi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Eposta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telefon" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HizmetNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MusteriNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TesisatNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TelefonNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributorNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TicaretSicilNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TAPDKNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BayiNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AboneNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SayacNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UreticiNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CiftciNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImalatciNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DosyaNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HastaNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubeNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MersisNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MasaNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Kullanici" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ilce" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BlokAdi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NACEKodu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KurumResmiUnvan" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KurumKayitNumarasi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VergiTipiKodu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TarafTuru" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AraciKurumVergiNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AraciKurumEtiket" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sahis" type="tns:Sahis" />
+          <s:element minOccurs="0" maxOccurs="1" name="MusteriTuru" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Sahis">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Ad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Soyad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unvan" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Uyruk" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankaHesap" type="tns:BankaHesap" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pasaport" type="tns:Pasaport" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BankaHesap">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="No" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Aciklama" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubeAdi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankaAdi" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Pasaport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="No" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tarih" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AliciMusteri">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Taraf" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SaticiTedarikcisi">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Taraf" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="VergiTemsilcisi">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Taraf" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Musteri">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Taraf">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Alias" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfFaturaKalemi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FaturaKalemi" nillable="true" type="tns:FaturaKalemi" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FaturaKalemi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TedarikciStokNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MusteriStokNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StokAdi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Aciklama" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Miktar" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Birim" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BirimFiyat" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DovizTipi" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ToplamTutar" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="IskontoOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="IskontoTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="KKDFKesintiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KKDFKesintiOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KKDFKesintiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="PetrolDogalgazOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PetrolDogalgazOTVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PetrolDogalgazOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DayanikliTuketimOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DayanikliTuketimOTVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DayanikliTuketimOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="AlkolluIcecekOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AlkolluIcecekOTVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="AlkolluIcecekOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TutunMamulleriOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TutunMamulleriOTVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TutunMamulleriOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="KolaliGazozOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KolaliGazozOTVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KolaliGazozOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DVKanun5035MuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVKanun5035Orani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVKanun5035Tutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="OIVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="OIVKanun5035MuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVKanun5035Orani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVKanun5035Tutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDVTevkifatMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVTevkifatOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVTevkifatTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BSMVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BSMVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BSMVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="MotorluTasitlarOTVMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MotorluTasitlarOTVOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="MotorluTasitlarOTVTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BorsaTescilUcretMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BorsaTescilUcretOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BorsaTescilUcretTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnerjiFonuMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnerjiFonuOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnerjiFonuTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BelediyeTuketimVergisiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BelediyeTuketimVergisiOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BelediyeTuketimVergisiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TRTPayiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TRTPayiOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TRTPayiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElektrikTuketimVergisiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ElektrikTuketimVergisiOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ElektrikTuketimVergisiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="StopajMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StopajOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="StopajTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TelsizKullanimAylikTaksitMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizKullanimAylikTaksitOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizKullanimAylikTaksitTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TelsizRuhsatUcretiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizRuhsatUcretiOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizRuhsatUcretiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CevreTemizlikVergisiMuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CevreTemizlikVergisiOrani" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CevreTemizlikVergisiTutari" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CevrimDovizTipi" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CevrimDovizKuru" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vergiler" type="tns:ArrayOfVergi" />
+          <s:element minOccurs="0" maxOccurs="1" name="EkSahalar" type="tns:ArrayOfEkSaha" />
+          <s:element minOccurs="0" maxOccurs="1" name="UreticiStokNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IskontoAciklama" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KKDFKesintiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PetrolDogalgazOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DayanikliTuketimOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="AlkolluIcecekOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TutunMamulleriOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KolaliGazozOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DVKanun5035Matrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OIVKanun5035Matrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KDVTevkifatMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BSMVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="MotorluTasitlarOTVMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BorsaTescilUcretMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnerjiFonuMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="BelediyeTuketimVergisiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TRTPayiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ElektrikTuketimVergisiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="StopajMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizKullanimAylikTaksitMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TelsizRuhsatUcretiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CevreTemizlikVergisiMatrahi" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="GonderilenMalAdedi" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="GonderilenMalAdediBirim" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IlerikiTarihteGonderilecekMalAdedi" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="IlerikiTarihteGonderilecekMalAdediBirim" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IlerikiTarihteMalGondermeNedenleri" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="TeslimAlinanMalAdedi" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TeslimAlinanMalAdediBirim" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EksikMalAdedi" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="EksikMalAdediBirim" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FazlaMalAdedi" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="FazlaMalAdediBirim" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KabulEdilmeyenMalAdedi" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="KabulEdilmeyenMalAdediBirim" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaliReddetmeNedenleri" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="GecTeslimSikayetAciklamasi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiparisSiraNo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfVergi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Vergi" nillable="true" type="tns:Vergi" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Vergi">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Tur" type="tns:TaxCodeContentType" />
+          <s:element minOccurs="1" maxOccurs="1" name="Oran" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tutar" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Matrah" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="MuafiyetNedeni" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MuafiyetKodu" type="tns:TaxExemptionReasonCodeContentType" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TaxCodeContentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="0003" />
+          <s:enumeration value="0015" />
+          <s:enumeration value="0061" />
+          <s:enumeration value="0071" />
+          <s:enumeration value="0073" />
+          <s:enumeration value="0074" />
+          <s:enumeration value="0075" />
+          <s:enumeration value="0076" />
+          <s:enumeration value="0077" />
+          <s:enumeration value="1047" />
+          <s:enumeration value="1048" />
+          <s:enumeration value="4080" />
+          <s:enumeration value="4081" />
+          <s:enumeration value="9015" />
+          <s:enumeration value="9021" />
+          <s:enumeration value="9077" />
+          <s:enumeration value="8001" />
+          <s:enumeration value="8002" />
+          <s:enumeration value="8003" />
+          <s:enumeration value="8004" />
+          <s:enumeration value="8005" />
+          <s:enumeration value="8006" />
+          <s:enumeration value="8007" />
+          <s:enumeration value="8008" />
+          <s:enumeration value="9040" />
+          <s:enumeration value="0011" />
+          <s:enumeration value="4171" />
+          <s:enumeration value="4071" />
+          <s:enumeration value="601" />
+          <s:enumeration value="602" />
+          <s:enumeration value="603" />
+          <s:enumeration value="604" />
+          <s:enumeration value="605" />
+          <s:enumeration value="606" />
+          <s:enumeration value="607" />
+          <s:enumeration value="608" />
+          <s:enumeration value="609" />
+          <s:enumeration value="610" />
+          <s:enumeration value="611" />
+          <s:enumeration value="612" />
+          <s:enumeration value="613" />
+          <s:enumeration value="614" />
+          <s:enumeration value="615" />
+          <s:enumeration value="616" />
+          <s:enumeration value="617" />
+          <s:enumeration value="618" />
+          <s:enumeration value="619" />
+          <s:enumeration value="620" />
+          <s:enumeration value="621" />
+          <s:enumeration value="622" />
+          <s:enumeration value="623" />
+          <s:enumeration value="624" />
+          <s:enumeration value="625" />
+          <s:enumeration value="626" />
+          <s:enumeration value="650" />
+          <s:enumeration value="0021" />
+          <s:enumeration value="0022" />
+          <s:enumeration value="9944" />
+          <s:enumeration value="SGK_PRIM" />
+          <s:enumeration value="0059" />
+          <s:enumeration value="627" />
+          <s:enumeration value="801" />
+          <s:enumeration value="802" />
+          <s:enumeration value="803" />
+          <s:enumeration value="804" />
+          <s:enumeration value="805" />
+          <s:enumeration value="806" />
+          <s:enumeration value="807" />
+          <s:enumeration value="808" />
+          <s:enumeration value="809" />
+          <s:enumeration value="810" />
+          <s:enumeration value="811" />
+          <s:enumeration value="812" />
+          <s:enumeration value="813" />
+          <s:enumeration value="814" />
+          <s:enumeration value="815" />
+          <s:enumeration value="816" />
+          <s:enumeration value="817" />
+          <s:enumeration value="818" />
+          <s:enumeration value="819" />
+          <s:enumeration value="820" />
+          <s:enumeration value="821" />
+          <s:enumeration value="822" />
+          <s:enumeration value="823" />
+          <s:enumeration value="824" />
+          <s:enumeration value="825" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="TaxExemptionReasonCodeContentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="000" />
+          <s:enumeration value="201" />
+          <s:enumeration value="202" />
+          <s:enumeration value="204" />
+          <s:enumeration value="205" />
+          <s:enumeration value="206" />
+          <s:enumeration value="207" />
+          <s:enumeration value="208" />
+          <s:enumeration value="209" />
+          <s:enumeration value="211" />
+          <s:enumeration value="212" />
+          <s:enumeration value="213" />
+          <s:enumeration value="214" />
+          <s:enumeration value="215" />
+          <s:enumeration value="216" />
+          <s:enumeration value="217" />
+          <s:enumeration value="218" />
+          <s:enumeration value="219" />
+          <s:enumeration value="220" />
+          <s:enumeration value="221" />
+          <s:enumeration value="223" />
+          <s:enumeration value="225" />
+          <s:enumeration value="250" />
+          <s:enumeration value="301" />
+          <s:enumeration value="302" />
+          <s:enumeration value="303" />
+          <s:enumeration value="304" />
+          <s:enumeration value="305" />
+          <s:enumeration value="306" />
+          <s:enumeration value="307" />
+          <s:enumeration value="308" />
+          <s:enumeration value="309" />
+          <s:enumeration value="310" />
+          <s:enumeration value="311" />
+          <s:enumeration value="312" />
+          <s:enumeration value="313" />
+          <s:enumeration value="314" />
+          <s:enumeration value="315" />
+          <s:enumeration value="316" />
+          <s:enumeration value="317" />
+          <s:enumeration value="318" />
+          <s:enumeration value="319" />
+          <s:enumeration value="320" />
+          <s:enumeration value="321" />
+          <s:enumeration value="350" />
+          <s:enumeration value="351" />
+          <s:enumeration value="801" />
+          <s:enumeration value="802" />
+          <s:enumeration value="803" />
+          <s:enumeration value="804" />
+          <s:enumeration value="805" />
+          <s:enumeration value="806" />
+          <s:enumeration value="807" />
+          <s:enumeration value="808" />
+          <s:enumeration value="809" />
+          <s:enumeration value="810" />
+          <s:enumeration value="811" />
+          <s:enumeration value="226" />
+          <s:enumeration value="227" />
+          <s:enumeration value="228" />
+          <s:enumeration value="229" />
+          <s:enumeration value="230" />
+          <s:enumeration value="231" />
+          <s:enumeration value="232" />
+          <s:enumeration value="234" />
+          <s:enumeration value="235" />
+          <s:enumeration value="236" />
+          <s:enumeration value="237" />
+          <s:enumeration value="238" />
+          <s:enumeration value="239" />
+          <s:enumeration value="240" />
+          <s:enumeration value="322" />
+          <s:enumeration value="323" />
+          <s:enumeration value="701" />
+          <s:enumeration value="702" />
+          <s:enumeration value="101" />
+          <s:enumeration value="102" />
+          <s:enumeration value="103" />
+          <s:enumeration value="104" />
+          <s:enumeration value="105" />
+          <s:enumeration value="106" />
+          <s:enumeration value="107" />
+          <s:enumeration value="108" />
+          <s:enumeration value="151" />
+          <s:enumeration value="703" />
+          <s:enumeration value="324" />
+          <s:enumeration value="325" />
+          <s:enumeration value="326" />
+          <s:enumeration value="327" />
+          <s:enumeration value="328" />
+          <s:enumeration value="501" />
+          <s:enumeration value="330" />
+          <s:enumeration value="331" />
+          <s:enumeration value="332" />
+          <s:enumeration value="241" />
+          <s:enumeration value="242" />
+          <s:enumeration value="333" />
+          <s:enumeration value="334" />
+          <s:enumeration value="812" />
+          <s:enumeration value="335" />
+          <s:enumeration value="336" />
+          <s:enumeration value="337" />
+          <s:enumeration value="338" />
+          <s:enumeration value="339" />
+          <s:enumeration value="340" />
+          <s:enumeration value="001" />
+          <s:enumeration value="341" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfEkSaha">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EkSaha" nillable="true" type="tns:EkSaha" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EkSaha">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Anahtar" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Deger" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIrsaliye">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Irsaliye" nillable="true" type="tns:Irsaliye" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Irsaliye">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="No" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tarih" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOKCBilgiFisi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OKCBilgiFisi" nillable="true" type="tns:OKCBilgiFisi" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OKCBilgiFisi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="No" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tarih" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tip" type="tns:OKCBilgiFisiTipi" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZRaporuNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OKCSeriNo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="OKCBilgiFisiTipi">
+        <s:restriction base="s:string">
+          <s:enumeration value="YOK" />
+          <s:enumeration value="AVANS" />
+          <s:enumeration value="YEMEK_FIS" />
+          <s:enumeration value="E-FATURA" />
+          <s:enumeration value="E-FATURA_IRSALIYE" />
+          <s:enumeration value="E-ARSIV" />
+          <s:enumeration value="E-ARSIV_IRSALIYE" />
+          <s:enumeration value="FATURA" />
+          <s:enumeration value="OTOPARK" />
+          <s:enumeration value="FATURA_TAHSILAT" />
+          <s:enumeration value="FATURA_TAHSILAT_KOMISYONLU" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="KaynakDokumanTuru">
+        <s:restriction base="s:string">
+          <s:enumeration value="EFATURA" />
+          <s:enumeration value="EARSIV" />
+          <s:enumeration value="EIRSALIYE" />
+          <s:enumeration value="EIRSALIYEYANIT" />
+          <s:enumeration value="EIHRACAT" />
+          <s:enumeration value="EMUSTAHSIL" />
+          <s:enumeration value="ESERBESTMESLEKMAKBUZU" />
+          <s:enumeration value="EGIDERPUSULASI" />
+          <s:enumeration value="EDOVIZALIMBELGESI" />
+          <s:enumeration value="EDOVIZSATIMBELGESI" />
+          <s:enumeration value="EADISYON" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Gonderi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KargoNo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UrunToplamTutar" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="GonderiFazlari" type="tns:ArrayOfGonderiFazi" />
+          <s:element minOccurs="0" maxOccurs="1" name="Teslimat" type="tns:Teslimat" />
+          <s:element minOccurs="0" maxOccurs="1" name="TasimaUniteleri" type="tns:ArrayOfTasimaUnitesi" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGonderiFazi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GonderiFazi" nillable="true" type="tns:GonderiFazi" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GonderiFazi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TasimaSekli" type="tns:TasimaSekli" />
+          <s:element minOccurs="0" maxOccurs="1" name="Suruculer" type="tns:ArrayOfSahis" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TasimaSekli">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HavaTasimaciligi" type="tns:HavaTasimaciligi" />
+          <s:element minOccurs="0" maxOccurs="1" name="KarayoluTasimaciligi" type="tns:KarayoluTasimaciligi" />
+          <s:element minOccurs="0" maxOccurs="1" name="DemiryoluTasimaciligi" type="tns:DemiryoluTasimaciligi" />
+          <s:element minOccurs="0" maxOccurs="1" name="DenizTasimaciligi" type="tns:DenizTasimaciligi" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HavaTasimaciligi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HavaAraciNo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="KarayoluTasimaciligi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PlakaNo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DemiryoluTasimaciligi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TrenNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VagonNo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DenizTasimaciligi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMONo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GemiAdi" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSahis">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Surucu" nillable="true" type="tns:Sahis" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Teslimat">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tasiyici" type="tns:Taraf" />
+          <s:element minOccurs="1" maxOccurs="1" name="FiiliSevkTarihi" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="GerceklesenTeslimTarihi" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="TeslimatYapilacak" type="tns:Taraf" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTasimaUnitesi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TasimaUnitesi" nillable="true" type="tns:TasimaUnitesi" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TasimaUnitesi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DorsePlakalari" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SevkIrsaliye">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="No" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tarih" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ETTN" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SGKOzelFaturaAlanlari">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IlaveFaturaTipi" type="tns:SGKIlaveFaturaTipi" />
+          <s:element minOccurs="0" maxOccurs="1" name="MukellefKodu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MukellefAdi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DosyaNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaturaDonemi" type="tns:FaturaDonemi" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SGKIlaveFaturaTipi">
+        <s:restriction base="s:string">
+          <s:enumeration value="YOK" />
+          <s:enumeration value="SAGLIK_ECZ" />
+          <s:enumeration value="SAGLIK_HAS" />
+          <s:enumeration value="SAGLIK_OPT" />
+          <s:enumeration value="SAGLIK_MED" />
+          <s:enumeration value="ABONELIK" />
+          <s:enumeration value="MAL_HIZMET" />
+          <s:enumeration value="DIGER" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="FaturaDonemi">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BaslangicTarihi" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="BitisTarihi" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="GonderimTipi">
+        <s:restriction base="s:string">
+          <s:enumeration value="KAGIT" />
+          <s:enumeration value="ELEKTRONIK" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="NetleEGiderPusulasi">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NetleEFatura" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NetleEMustahsil">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NetleEFatura" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NetleESerbestMeslekMakbuzu">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NetleEFatura" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NetleEIrsaliyeYanit">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NetleEFatura" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NetleEIrsaliye">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NetleEFatura" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NetleEIhracat">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NetleEFatura" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NetleEArsiv">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NetleEFatura" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="CheckInvoiceResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CheckDespatchAdvice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="despatchAdvice" type="tns:NetleEIrsaliye" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckDespatchAdviceResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CheckCommonDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="document" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckCommonDocumentResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetInvoiceHtmlByNetleFatura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="invoice" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoiceHtmlByNetleFaturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoiceHtmlByNetleFaturaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommonDocumentHtmlByNetleFatura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="document" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommonDocumentHtmlByNetleFaturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCommonDocumentHtmlByNetleFaturaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadInvoice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="uuid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="prefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="invoice" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadInvoiceResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UploadCommonDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="documentUUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="prefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="document" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadCommonDocumentResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UploadCommonDocumentXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="documentUUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="prefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="documentXML" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="docType" type="tns:GetDocumentType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="GetDocumentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Invoice" />
+          <s:enumeration value="Envelope" />
+          <s:enumeration value="ApplicationResponse" />
+          <s:enumeration value="SystemResponse" />
+          <s:enumeration value="NetleFatura" />
+          <s:enumeration value="DespatchAdvice" />
+          <s:enumeration value="ReceiptAdvice" />
+          <s:enumeration value="NetleIrsaliye" />
+          <s:enumeration value="NetleIrsaliyeYanit" />
+          <s:enumeration value="CreditNote" />
+          <s:enumeration value="None" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UploadCommonDocumentXMLResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DownloadInvoice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="uuid" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadInvoiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownloadInvoiceResult" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadCommonDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="documentUUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadCommonDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownloadCommonDocumentResult" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendEmailByUUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="info" type="tns:InvoiceSendingMailInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InvoiceSendingMailInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SendingMailInfo">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AttachmentByUUID" type="tns:ArrayOfGuid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SendingMailInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="To" type="tns:ArrayOfToMailAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="CC" type="tns:ArrayOfCCMailAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BodyAsHtml" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfToMailAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ToMailAddress" nillable="true" type="tns:ToMailAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ToMailAddress">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:DFSMailAddress" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DFSMailAddress" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CCMailAddress">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:DFSMailAddress" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCCMailAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CCMailAddress" nillable="true" type="tns:CCMailAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGuid">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="guid" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendEmailByUUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendEmailByUUIDResult" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEMailStatusById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="emailJobId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEMailStatusByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEMailStatusByIdResult" type="tns:SendingMailResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendingMailResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="JobId" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="JobState" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OK" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLastError">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastErrorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLastErrorResult" type="tns:SoapExceptionDetail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SoapExceptionDetail">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Code" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Detail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetWorkflowInfoByUUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="uuid" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWorkflowInfoByUUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWorkflowInfoByUUIDResult" type="tns:WFSessionHistories" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WFSessionHistories">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WFSessionDetail">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Histories" type="tns:ArrayOfWFHistory" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="WFSessionDetail">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ReRunnable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastUserDetail" type="tns:WFUserDetail" />
+          <s:element minOccurs="1" maxOccurs="1" name="WFState" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WorkflowUniqueId" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="WorkflowRecordId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WFUserDetail">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMailAddress" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfWFHistory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WFHistory" nillable="true" type="tns:WFHistory" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WFHistory">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CreateDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserDetail" type="tns:WFUserDetail" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsApproved" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApproveResult" type="tns:ApproveResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ApproveResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserApproveType" type="tns:ApproveType" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProcessTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReasonDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ApproveType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Init" />
+          <s:enumeration value="Accept" />
+          <s:enumeration value="Reject" />
+          <s:enumeration value="TimedOut" />
+          <s:enumeration value="OnBehalfOf" />
+          <s:enumeration value="Terminated" />
+          <s:enumeration value="Other" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetWorkflowInfoByGUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="wfGUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWorkflowInfoByGUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWorkflowInfoByGUIDResult" type="tns:WFSessionHistories" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AcceptInvoiceDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="uuid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="reasonDescription" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AcceptInvoiceDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AcceptInvoiceDocumentResult" type="tns:SoapExceptionDetail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RejectInvoiceDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="uuid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="reasonDescription" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RejectInvoiceDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RejectInvoiceDocumentResult" type="tns:SoapExceptionDetail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadUbltrWithPDFLayout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="invoices" type="tns:ArrayOfUbltrWithPDFLayout" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUbltrWithPDFLayout">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UbltrWithPDFLayout" nillable="true" type="tns:UbltrWithPDFLayout" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UbltrWithPDFLayout">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UbltrXML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PDFContent" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="PDFLargestEdgeLength" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UploadUbltrWithPDFLayoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadUbltrWithPDFLayoutResult" type="tns:UploadResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UploadResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MethodResultOutput" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MethodResultOutput" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorDetail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCommonDocumentPDFByUUIDs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pdfInputs" type="tns:ArrayOfUbltrPDFInput" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUbltrPDFInput">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UbltrPDFInput" nillable="true" type="tns:UbltrPDFInput" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UbltrPDFInput">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UbltrPDF">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="UseEmbeddedXSLT" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExternalLayoutFileName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UbltrPDF">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UUID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="NetleEFatura" type="tns:NetleEFatura" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UbltrPDFOutput">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UbltrPDF">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="HasError" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="ErrorDetail" type="tns:SoapExceptionDetail" />
+              <s:element minOccurs="0" maxOccurs="1" name="PDFContent" type="s:base64Binary" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCommonDocumentPDFByUUIDsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCommonDocumentPDFByUUIDsResult" type="tns:ArrayOfUbltrPDFOutput" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUbltrPDFOutput">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UbltrPDFOutput" nillable="true" type="tns:UbltrPDFOutput" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCommonUserListAsZIP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommonUserListAsZIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCommonUserListAsZIPResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEArcReports">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEArcReportsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEArcReportsResult" type="tns:ArrayOfEArchiveLegalReport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEArchiveLegalReport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EArchiveLegalReport" nillable="true" type="tns:EArchiveLegalReport" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EArchiveLegalReport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TaxPayerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReportedBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReportId" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="TermBeginDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TermEndDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubTermBeginDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubTermEndDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubReportCounter" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEArcReportById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="reportId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEArcReportByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEArcReportByIdResult" type="tns:EArchiveLegalReportData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EArchiveLegalReportData">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EArchiveLegalReport">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="XmlContent" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetEArchiveStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eArchiveUUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEArchiveStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEArchiveStatusResult" type="tns:EArchiveStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EArchiveStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RecordStatus" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecordStatusText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GIBOKDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="GIBDeleteDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeleteDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="OK" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreateDatetTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="GIBReportId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GIBDeleteReportId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvoiceNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InvoiceDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="UUID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckSum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreviewUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GIBObjectDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ObjectDateTime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObjectEArchive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eArchiveUUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="objectionDocNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="objectionMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="objectionReason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObjectEArchiveResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteEArchive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eArchiveUUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteEArchiveResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteEArchiveWithDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eArchiveUUID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="deleteDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteEArchiveWithDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteEArchiveWithDateResult" type="tns:DeleteResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DeleteResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MethodResultOutput" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SearchEArchive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="seado" type="tns:SearchEArcDocumentOption" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SearchEArcDocumentOption">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StartDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDateTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvoiceNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InvoiceDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceiverTaxNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GIBPackageId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchEArchiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchEArchiveResult" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEArchiveStatusByObject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eArchiveUUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEArchiveStatusByObjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEArchiveStatusByObjectResult" type="tns:EArchiveStatusWithObject" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EArchiveStatusWithObject">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NetleFaturaObj" type="tns:NetleEFatura" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:EArchiveStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="SignedXml" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchEInvoice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sdo" type="tns:SearchDocumentOption" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SearchDocumentOption">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StartDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocumentType" type="tns:GetDocumentType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderIdentifier" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecieverIdentifier" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastDocumentId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocumentDirection" type="tns:SearchDocumentDirection" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SearchDocumentDirection">
+        <s:restriction base="s:string">
+          <s:enumeration value="Outbound" />
+          <s:enumeration value="Inbound" />
+          <s:enumeration value="OutboundAndInbound" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SearchEInvoiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchEInvoiceResult" type="tns:ArrayOfDocumentKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDocumentKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DocumentKey" nillable="true" type="tns:DocumentKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DocumentKey">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocumentType" type="tns:GetDocumentType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocumentDirection" type="tns:DocumentDirection" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExcludeXmlContent" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DocumentDirection">
+        <s:restriction base="s:string">
+          <s:enumeration value="Outbound" />
+          <s:enumeration value="Inbound" />
+          <s:enumeration value="None" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetEInvoiceDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="documentKeys" type="tns:ArrayOfDocumentKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEInvoiceDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEInvoiceDocumentResult" type="tns:ArrayOfNDocument" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfNDocument">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NDocument" nillable="true" type="tns:NDocument" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NDocument">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NDocumentResponse">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="CreateDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="XmlContent" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Direction" type="tns:DocumentDirection" />
+              <s:element minOccurs="0" maxOccurs="1" name="SenderTaxNumber" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="DocumentType" type="tns:GetDocumentType" />
+              <s:element minOccurs="0" maxOccurs="1" name="SenderName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReceiverTaxNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReceiverName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubDocumentType" type="tns:SubDocumentType" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceResponseEnvelopeId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceResponseDescription" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceEnvelopeGUID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceResponseReason" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SenderAlias" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReceiverAlias" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceState" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DigestValue" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExportDocument" type="tns:ExportDocument" />
+              <s:element minOccurs="0" maxOccurs="1" name="WorkflowDocument" type="tns:WFSessionDetail" />
+              <s:element minOccurs="1" maxOccurs="1" name="FinalState" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="InvoiceResponseExpired" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NDocumentResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SoapExceptionDetail">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="DocumentId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="DbPkValue" type="s:long" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="SubDocumentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="DefaultXml" />
+          <s:enumeration value="NetleXml" />
+          <s:enumeration value="NetleXls" />
+          <s:enumeration value="None" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ExportDocument">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GCBDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="GCBId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GTBRefNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GTBGCBTescilNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GTBFiiliIhracatTarihi" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEInvoiceDocumentByObject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="documentKeys" type="tns:ArrayOfDocumentKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEInvoiceDocumentByObjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEInvoiceDocumentByObjectResult" type="tns:ArrayOfNDocumentWithObject" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfNDocumentWithObject">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NDocumentWithObject" nillable="true" type="tns:NDocumentWithObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NDocumentWithObject">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NetleFaturaObj" type="tns:NetleEFatura" />
+          <s:element minOccurs="0" maxOccurs="1" name="Document" type="tns:NDocument" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEInvoiceAppResponsesByUUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="uuid" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEInvoiceAppResponsesByUUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEInvoiceAppResponsesByUUIDResult" type="tns:ArrayOfNAppResponseDocument" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfNAppResponseDocument">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NAppResponseDocument" nillable="true" type="tns:NAppResponseDocument" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NAppResponseDocument">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NResponseDocument">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Html" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NResponseDocument" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NDocument">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetExportInvoiceHtmlByNetleFatura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="invoice" type="tns:NetleEFatura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExportInvoiceHtmlByNetleFaturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExportInvoiceHtmlByNetleFaturaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExportInvoiceHtmlByUUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="uuid" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExportInvoiceHtmlByUUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExportInvoiceHtmlByUUIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEnvelopeStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="docGuids" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEnvelopeStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEnvelopeStatusResult" type="tns:ArrayOfEDocStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEDocStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EDocStatus" nillable="true" type="tns:EDocStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EDocStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DocGUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Code" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SEDP_SignAndSend">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taxId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="moduleType" type="tns:ModuleType" />
+            <s:element minOccurs="0" maxOccurs="1" name="documentXML" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="docType" type="tns:GetDocumentType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="ModuleType">
+        <s:restriction base="s:string">
+          <s:enumeration value="eArchive" />
+          <s:enumeration value="eInvoice" />
+          <s:enumeration value="eDispatch" />
+          <s:enumeration value="eTicket" />
+          <s:enumeration value="eSEVoucher" />
+          <s:enumeration value="EProducerReceipt" />
+          <s:enumeration value="eTab" />
+          <s:enumeration value="eCurrencyExchange" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SEDP_SignAndSendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SEDP_SignAndSendResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEDP_GetDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taxId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="moduleType" type="tns:ModuleType" />
+            <s:element minOccurs="1" maxOccurs="1" name="docType" type="tns:GetDocumentType" />
+            <s:element minOccurs="0" maxOccurs="1" name="documentKeys" type="tns:ArrayOfDocumentKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEDP_GetDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SEDP_GetDocumentResult" type="tns:ArrayOfNDocument" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEDP_GetHtml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taxId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="moduleType" type="tns:ModuleType" />
+            <s:element minOccurs="1" maxOccurs="1" name="docType" type="tns:GetDocumentType" />
+            <s:element minOccurs="0" maxOccurs="1" name="documentUUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEDP_GetHtmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SEDP_GetHtmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckSystem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkSystemKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckSystemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckSystemResult" type="tns:CheckSystemResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CheckSystemResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FormServiceIsOK" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="MPIPServiceIsOK" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateUserToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="moduleType" type="tns:ModuleType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUserTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateUserTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetFullUserListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFullUserList" />
+  </wsdl:message>
+  <wsdl:message name="GetFullUserListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFullUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUserListSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUserList" />
+  </wsdl:message>
+  <wsdl:message name="SearchUserListSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTaxIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByTaxId" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTaxIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByTaxIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserInfoByTaxIdSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckUserInfoByTaxId" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserInfoByTaxIdSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckUserInfoByTaxIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyPostBoxListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyPostBoxList" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyPostBoxListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyPostBoxListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceHtmlByUUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoiceHtmlByUUID" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceHtmlByUUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoiceHtmlByUUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonDocumentHtmlByUUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCommonDocumentHtmlByUUID" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonDocumentHtmlByUUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCommonDocumentHtmlByUUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceSignedXmlByUUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoiceSignedXmlByUUID" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceSignedXmlByUUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoiceSignedXmlByUUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonDocumentSignedXmlByUUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCommonDocumentSignedXmlByUUID" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonDocumentSignedXmlByUUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCommonDocumentSignedXmlByUUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckInvoiceSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckInvoice" />
+  </wsdl:message>
+  <wsdl:message name="CheckInvoiceSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckDespatchAdviceSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckDespatchAdvice" />
+  </wsdl:message>
+  <wsdl:message name="CheckDespatchAdviceSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckDespatchAdviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckCommonDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckCommonDocument" />
+  </wsdl:message>
+  <wsdl:message name="CheckCommonDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckCommonDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceHtmlByNetleFaturaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoiceHtmlByNetleFatura" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceHtmlByNetleFaturaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoiceHtmlByNetleFaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonDocumentHtmlByNetleFaturaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCommonDocumentHtmlByNetleFatura" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonDocumentHtmlByNetleFaturaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCommonDocumentHtmlByNetleFaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadInvoiceSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadInvoice" />
+  </wsdl:message>
+  <wsdl:message name="UploadInvoiceSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadCommonDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadCommonDocument" />
+  </wsdl:message>
+  <wsdl:message name="UploadCommonDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadCommonDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadCommonDocumentXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadCommonDocumentXML" />
+  </wsdl:message>
+  <wsdl:message name="UploadCommonDocumentXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadCommonDocumentXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownloadInvoiceSoapIn">
+    <wsdl:part name="parameters" element="tns:DownloadInvoice" />
+  </wsdl:message>
+  <wsdl:message name="DownloadInvoiceSoapOut">
+    <wsdl:part name="parameters" element="tns:DownloadInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownloadCommonDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:DownloadCommonDocument" />
+  </wsdl:message>
+  <wsdl:message name="DownloadCommonDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:DownloadCommonDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendEmailByUUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:SendEmailByUUID" />
+  </wsdl:message>
+  <wsdl:message name="SendEmailByUUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:SendEmailByUUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEMailStatusByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEMailStatusById" />
+  </wsdl:message>
+  <wsdl:message name="GetEMailStatusByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEMailStatusByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLastErrorSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLastError" />
+  </wsdl:message>
+  <wsdl:message name="GetLastErrorSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLastErrorResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWorkflowInfoByUUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWorkflowInfoByUUID" />
+  </wsdl:message>
+  <wsdl:message name="GetWorkflowInfoByUUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWorkflowInfoByUUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWorkflowInfoByGUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWorkflowInfoByGUID" />
+  </wsdl:message>
+  <wsdl:message name="GetWorkflowInfoByGUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWorkflowInfoByGUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AcceptInvoiceDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:AcceptInvoiceDocument" />
+  </wsdl:message>
+  <wsdl:message name="AcceptInvoiceDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:AcceptInvoiceDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="RejectInvoiceDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:RejectInvoiceDocument" />
+  </wsdl:message>
+  <wsdl:message name="RejectInvoiceDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:RejectInvoiceDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadUbltrWithPDFLayoutSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadUbltrWithPDFLayout" />
+  </wsdl:message>
+  <wsdl:message name="UploadUbltrWithPDFLayoutSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadUbltrWithPDFLayoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonDocumentPDFByUUIDsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCommonDocumentPDFByUUIDs" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonDocumentPDFByUUIDsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCommonDocumentPDFByUUIDsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonUserListAsZIPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCommonUserListAsZIP" />
+  </wsdl:message>
+  <wsdl:message name="GetCommonUserListAsZIPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCommonUserListAsZIPResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEArcReportsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEArcReports" />
+  </wsdl:message>
+  <wsdl:message name="GetEArcReportsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEArcReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEArcReportByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEArcReportById" />
+  </wsdl:message>
+  <wsdl:message name="GetEArcReportByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEArcReportByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEArchiveStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEArchiveStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetEArchiveStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEArchiveStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObjectEArchiveSoapIn">
+    <wsdl:part name="parameters" element="tns:ObjectEArchive" />
+  </wsdl:message>
+  <wsdl:message name="ObjectEArchiveSoapOut">
+    <wsdl:part name="parameters" element="tns:ObjectEArchiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteEArchiveSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteEArchive" />
+  </wsdl:message>
+  <wsdl:message name="DeleteEArchiveSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteEArchiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteEArchiveWithDateSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteEArchiveWithDate" />
+  </wsdl:message>
+  <wsdl:message name="DeleteEArchiveWithDateSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteEArchiveWithDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchEArchiveSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchEArchive" />
+  </wsdl:message>
+  <wsdl:message name="SearchEArchiveSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchEArchiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEArchiveStatusByObjectSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEArchiveStatusByObject" />
+  </wsdl:message>
+  <wsdl:message name="GetEArchiveStatusByObjectSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEArchiveStatusByObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchEInvoiceSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchEInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SearchEInvoiceSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchEInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEInvoiceDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEInvoiceDocument" />
+  </wsdl:message>
+  <wsdl:message name="GetEInvoiceDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEInvoiceDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEInvoiceDocumentByObjectSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEInvoiceDocumentByObject" />
+  </wsdl:message>
+  <wsdl:message name="GetEInvoiceDocumentByObjectSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEInvoiceDocumentByObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEInvoiceAppResponsesByUUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEInvoiceAppResponsesByUUID" />
+  </wsdl:message>
+  <wsdl:message name="GetEInvoiceAppResponsesByUUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEInvoiceAppResponsesByUUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExportInvoiceHtmlByNetleFaturaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExportInvoiceHtmlByNetleFatura" />
+  </wsdl:message>
+  <wsdl:message name="GetExportInvoiceHtmlByNetleFaturaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExportInvoiceHtmlByNetleFaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExportInvoiceHtmlByUUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExportInvoiceHtmlByUUID" />
+  </wsdl:message>
+  <wsdl:message name="GetExportInvoiceHtmlByUUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExportInvoiceHtmlByUUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEnvelopeStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEnvelopeStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetEnvelopeStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEnvelopeStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="SEDP_SignAndSendSoapIn">
+    <wsdl:part name="parameters" element="tns:SEDP_SignAndSend" />
+  </wsdl:message>
+  <wsdl:message name="SEDP_SignAndSendSoapOut">
+    <wsdl:part name="parameters" element="tns:SEDP_SignAndSendResponse" />
+  </wsdl:message>
+  <wsdl:message name="SEDP_GetDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:SEDP_GetDocument" />
+  </wsdl:message>
+  <wsdl:message name="SEDP_GetDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:SEDP_GetDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SEDP_GetHtmlSoapIn">
+    <wsdl:part name="parameters" element="tns:SEDP_GetHtml" />
+  </wsdl:message>
+  <wsdl:message name="SEDP_GetHtmlSoapOut">
+    <wsdl:part name="parameters" element="tns:SEDP_GetHtmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckSystemSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckSystem" />
+  </wsdl:message>
+  <wsdl:message name="CheckSystemSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckSystemResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateUserToken" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateUserTokenResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Integration10Soap">
+    <wsdl:operation name="GetFullUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: session modul tipine uygun e-donusum mukellef listesini getirir | eInvoice/eArchive: eFatura mukellefleri, eDespatch: eIrsaliye mukellefleri</wsdl:documentation>
+      <wsdl:input message="tns:GetFullUserListSoapIn" />
+      <wsdl:output message="tns:GetFullUserListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: session modul tipine ve belirlenen tarih ve durum kriterlerine göre uygun e-donusum mukellef listesini getirir | eInvoice/eArchive: eFatura mukellefleri, eDespatch: eIrsaliye mukellefleri</wsdl:documentation>
+      <wsdl:input message="tns:SearchUserListSoapIn" />
+      <wsdl:output message="tns:SearchUserListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByTaxId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: eFatura, eIrsaliye ve eBilet icin vkn/tckn bilgilerini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByTaxIdSoapIn" />
+      <wsdl:output message="tns:GetUserInfoByTaxIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserInfoByTaxId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Modul ilgili belge olusturulmadan once vkn/tckn bilgisini kontrol eder</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserInfoByTaxIdSoapIn" />
+      <wsdl:output message="tns:CheckUserInfoByTaxIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyPostBoxList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: session modul tipine uygun e-donusum mukellef listesini getirir | eInvoice/eArchive: eFatura mukellefleri, eDespatch: eIrsaliye mukellefleri</wsdl:documentation>
+      <wsdl:input message="tns:GetCompanyPostBoxListSoapIn" />
+      <wsdl:output message="tns:GetCompanyPostBoxListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceHtmlByUUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Arsiv ya da faturanin tekil degeri uzerinden html bilgisini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetInvoiceHtmlByUUIDSoapIn" />
+      <wsdl:output message="tns:GetInvoiceHtmlByUUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentHtmlByUUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Dokuman tekil anahtar degeri uzerinden oturum bilgisindeki modul degerine gore html bilgisini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetCommonDocumentHtmlByUUIDSoapIn" />
+      <wsdl:output message="tns:GetCommonDocumentHtmlByUUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceSignedXmlByUUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Arsiv ya da faturanin tekil degeri uzerinden imzali xml bilgisini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetInvoiceSignedXmlByUUIDSoapIn" />
+      <wsdl:output message="tns:GetInvoiceSignedXmlByUUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentSignedXmlByUUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Dokuman tekil degeri uzerinden imzali xml bilgisini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetCommonDocumentSignedXmlByUUIDSoapIn" />
+      <wsdl:output message="tns:GetCommonDocumentSignedXmlByUUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckInvoice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Sistemde fatura bilgisi saklanmadan once sema, sematron ve is kurallari denetlenir</wsdl:documentation>
+      <wsdl:input message="tns:CheckInvoiceSoapIn" />
+      <wsdl:output message="tns:CheckInvoiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckDespatchAdvice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Sistemde fatura bilgisi saklanmadan once sema, sematron ve is kurallari denetlenir</wsdl:documentation>
+      <wsdl:input message="tns:CheckDespatchAdviceSoapIn" />
+      <wsdl:output message="tns:CheckDespatchAdviceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCommonDocument">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Sistemde dokuman bilgisi saklanmadan once sema, sematron ve is kurallari denetlenir</wsdl:documentation>
+      <wsdl:input message="tns:CheckCommonDocumentSoapIn" />
+      <wsdl:output message="tns:CheckCommonDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceHtmlByNetleFatura">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: NetleEFatura nesnesinden VKN degeri algilanarak eArsiv ya da eFatura goruntusu html olarak hazirlanir</wsdl:documentation>
+      <wsdl:input message="tns:GetInvoiceHtmlByNetleFaturaSoapIn" />
+      <wsdl:output message="tns:GetInvoiceHtmlByNetleFaturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentHtmlByNetleFatura">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: NetleEFatura nesnesinden VKN degeri algilanarak Kaynak Dokuman Turune gore html olarak hazirlanir</wsdl:documentation>
+      <wsdl:input message="tns:GetCommonDocumentHtmlByNetleFaturaSoapIn" />
+      <wsdl:output message="tns:GetCommonDocumentHtmlByNetleFaturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadInvoice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine gore NetleEFatura biciminde e-fatura ya da e-arsiv dokumani yukler</wsdl:documentation>
+      <wsdl:input message="tns:UploadInvoiceSoapIn" />
+      <wsdl:output message="tns:UploadInvoiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadCommonDocument">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine gore NetleEFatura biciminde e-dokumani yukler</wsdl:documentation>
+      <wsdl:input message="tns:UploadCommonDocumentSoapIn" />
+      <wsdl:output message="tns:UploadCommonDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadCommonDocumentXML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine ve dokuman turune gore XML biciminde e-dokumani yukler</wsdl:documentation>
+      <wsdl:input message="tns:UploadCommonDocumentXMLSoapIn" />
+      <wsdl:output message="tns:UploadCommonDocumentXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadInvoice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine gore NetleEFatura biciminde e-fatura ya da e-arsiv dokumanini getirir</wsdl:documentation>
+      <wsdl:input message="tns:DownloadInvoiceSoapIn" />
+      <wsdl:output message="tns:DownloadInvoiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadCommonDocument">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine gore NetleEFatura biciminde ortak dokumani getirir</wsdl:documentation>
+      <wsdl:input message="tns:DownloadCommonDocumentSoapIn" />
+      <wsdl:output message="tns:DownloadCommonDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByUUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine gore UUID seklinde verilen efatura ya da earsiv dokumanlarini eposta ile gonderir</wsdl:documentation>
+      <wsdl:input message="tns:SendEmailByUUIDSoapIn" />
+      <wsdl:output message="tns:SendEmailByUUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEMailStatusById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: SendEmailByUUID yonteminden donen JobId degerine gore durum sorgulama sonucunu getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetEMailStatusByIdSoapIn" />
+      <wsdl:output message="tns:GetEMailStatusByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLastError">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: userToken bazinda son islemde alinan hata mesajini geriye doner</wsdl:documentation>
+      <wsdl:input message="tns:GetLastErrorSoapIn" />
+      <wsdl:output message="tns:GetLastErrorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkflowInfoByUUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili fatura ettn degerine gore akis son bilgisini ve tarihcesini geriye doner</wsdl:documentation>
+      <wsdl:input message="tns:GetWorkflowInfoByUUIDSoapIn" />
+      <wsdl:output message="tns:GetWorkflowInfoByUUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkflowInfoByGUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili netle wf guid (tekil) anahtar degerine gore akis son bilgisini ve tarihcesini geriye doner</wsdl:documentation>
+      <wsdl:input message="tns:GetWorkflowInfoByGUIDSoapIn" />
+      <wsdl:output message="tns:GetWorkflowInfoByGUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptInvoiceDocument">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: Onayda bekleyen dokumani ilgili aciklama ile kabul et</wsdl:documentation>
+      <wsdl:input message="tns:AcceptInvoiceDocumentSoapIn" />
+      <wsdl:output message="tns:AcceptInvoiceDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RejectInvoiceDocument">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: onayda bekleyen dokumani ilgili aciklama ile reddet</wsdl:documentation>
+      <wsdl:input message="tns:RejectInvoiceDocumentSoapIn" />
+      <wsdl:output message="tns:RejectInvoiceDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadUbltrWithPDFLayout">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine gore PDF goruntusu ile birlikte fatura/arsiv dokumanini yukle</wsdl:documentation>
+      <wsdl:input message="tns:UploadUbltrWithPDFLayoutSoapIn" />
+      <wsdl:output message="tns:UploadUbltrWithPDFLayoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentPDFByUUIDs">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine ve UUID deger(ler)ine gore PDF dokuman olusturulur.</wsdl:documentation>
+      <wsdl:input message="tns:GetCommonDocumentPDFByUUIDsSoapIn" />
+      <wsdl:output message="tns:GetCommonDocumentPDFByUUIDsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonUserListAsZIP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: ilgili token degerine GIB kullanici listesini ZIP paketi olarak geriye doner</wsdl:documentation>
+      <wsdl:input message="tns:GetCommonUserListAsZIPSoapIn" />
+      <wsdl:output message="tns:GetCommonUserListAsZIPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEArcReports">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Arsiv: GIB e gonderilen e-arsiv raporunun ust bilgilerini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetEArcReportsSoapIn" />
+      <wsdl:output message="tns:GetEArcReportsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEArcReportById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Arsiv: GIB e gonderilen e-arsiv raporunun tekil anahtar uzerinden xml icerigini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetEArcReportByIdSoapIn" />
+      <wsdl:output message="tns:GetEArcReportByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEArchiveStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Arsiv: e-arsiv belgesinin durum bilgisini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetEArchiveStatusSoapIn" />
+      <wsdl:output message="tns:GetEArchiveStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObjectEArchive">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Arsiv: Gonderilen e-arsiv belgesine itiraz ve gib raporuna itiraz edilmis olarak gitmesini saglar</wsdl:documentation>
+      <wsdl:input message="tns:ObjectEArchiveSoapIn" />
+      <wsdl:output message="tns:ObjectEArchiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEArchive">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Arsiv: Gonderilen e-arsiv belgesini siler ve gib raporuna silinmis olarak gitmesini saglar</wsdl:documentation>
+      <wsdl:input message="tns:DeleteEArchiveSoapIn" />
+      <wsdl:output message="tns:DeleteEArchiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEArchiveWithDate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Arsiv: Gonderilen e-arsiv belgesini siler ve gib raporuna silinmis olarak gitmesini saglar</wsdl:documentation>
+      <wsdl:input message="tns:DeleteEArchiveWithDateSoapIn" />
+      <wsdl:output message="tns:DeleteEArchiveWithDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchEArchive">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Arsiv: Belirlenen kriterlere gore e-arsiv dokumanlarini arar ve geriye tekil UUID degerlerini getirir</wsdl:documentation>
+      <wsdl:input message="tns:SearchEArchiveSoapIn" />
+      <wsdl:output message="tns:SearchEArchiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEArchiveStatusByObject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Arsiv: Belirlenen tekil anahtarlara gore e-arşiv durum bilgisini ve NetleEFatura nesnesini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetEArchiveStatusByObjectSoapIn" />
+      <wsdl:output message="tns:GetEArchiveStatusByObjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchEInvoice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura: Belirlenen kriterlere gore e-fatura dokumanlarini arar ve geriye tekil UUID degerlerini getirir</wsdl:documentation>
+      <wsdl:input message="tns:SearchEInvoiceSoapIn" />
+      <wsdl:output message="tns:SearchEInvoiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceDocument">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura: Belirlenen tekil anahtarlara gore e-fatura dokumanlarini arar ve geriye dokuman bilgilerini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetEInvoiceDocumentSoapIn" />
+      <wsdl:output message="tns:GetEInvoiceDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceDocumentByObject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura: Belirlenen tekil anahtarlara gore e-fatura dokumanlarini arar ve geriye dokuman bilgilerini getirir</wsdl:documentation>
+      <wsdl:input message="tns:GetEInvoiceDocumentByObjectSoapIn" />
+      <wsdl:output message="tns:GetEInvoiceDocumentByObjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceAppResponsesByUUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura: Belirlenen tekil anahtarlara gore e-fatura uygulama yanitlarini sirasiyla geriye doner</wsdl:documentation>
+      <wsdl:input message="tns:GetEInvoiceAppResponsesByUUIDSoapIn" />
+      <wsdl:output message="tns:GetEInvoiceAppResponsesByUUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExportInvoiceHtmlByNetleFatura">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura: ihracat faturalarinda gtb disindeki musteri adina gore html goruntusu hazirla</wsdl:documentation>
+      <wsdl:input message="tns:GetExportInvoiceHtmlByNetleFaturaSoapIn" />
+      <wsdl:output message="tns:GetExportInvoiceHtmlByNetleFaturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExportInvoiceHtmlByUUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura: ihracat faturalarinda gtb disindeki musteri adina gore html goruntusu hazirla</wsdl:documentation>
+      <wsdl:input message="tns:GetExportInvoiceHtmlByUUIDSoapIn" />
+      <wsdl:output message="tns:GetExportInvoiceHtmlByUUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEnvelopeStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura: Toplu sekilde zarf durum sorgulama islemidir</wsdl:documentation>
+      <wsdl:input message="tns:GetEnvelopeStatusSoapIn" />
+      <wsdl:output message="tns:GetEnvelopeStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_SignAndSend">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SEDP:Internal Use</wsdl:documentation>
+      <wsdl:input message="tns:SEDP_SignAndSendSoapIn" />
+      <wsdl:output message="tns:SEDP_SignAndSendSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_GetDocument">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SEDP:Internal Use</wsdl:documentation>
+      <wsdl:input message="tns:SEDP_GetDocumentSoapIn" />
+      <wsdl:output message="tns:SEDP_GetDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_GetHtml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SEDP:Internal Use</wsdl:documentation>
+      <wsdl:input message="tns:SEDP_GetHtmlSoapIn" />
+      <wsdl:output message="tns:SEDP_GetHtmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSystem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sistemin durumunu kontrol eder</wsdl:documentation>
+      <wsdl:input message="tns:CheckSystemSoapIn" />
+      <wsdl:output message="tns:CheckSystemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ortak: e-fatura ya da e-arsiv islevlerini kullanmadan once guvenlik denetimi icin alinmasi gereken token degerini getirir</wsdl:documentation>
+      <wsdl:input message="tns:CreateUserTokenSoapIn" />
+      <wsdl:output message="tns:CreateUserTokenSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Integration10Soap" type="tns:Integration10Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFullUserList">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetFullUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserList">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SearchUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByTaxId">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetUserInfoByTaxId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserInfoByTaxId">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckUserInfoByTaxId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyPostBoxList">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCompanyPostBoxList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceHtmlByUUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetInvoiceHtmlByUUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentHtmlByUUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonDocumentHtmlByUUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceSignedXmlByUUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetInvoiceSignedXmlByUUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentSignedXmlByUUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonDocumentSignedXmlByUUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckInvoice">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDespatchAdvice">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckDespatchAdvice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCommonDocument">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckCommonDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceHtmlByNetleFatura">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetInvoiceHtmlByNetleFatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentHtmlByNetleFatura">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonDocumentHtmlByNetleFatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadInvoice">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/UploadInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadCommonDocument">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/UploadCommonDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadCommonDocumentXML">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/UploadCommonDocumentXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadInvoice">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/DownloadInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadCommonDocument">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/DownloadCommonDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByUUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SendEmailByUUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEMailStatusById">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEMailStatusById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastError">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetLastError" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkflowInfoByUUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetWorkflowInfoByUUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkflowInfoByGUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetWorkflowInfoByGUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptInvoiceDocument">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/AcceptInvoiceDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RejectInvoiceDocument">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/RejectInvoiceDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadUbltrWithPDFLayout">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/UploadUbltrWithPDFLayout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentPDFByUUIDs">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonDocumentPDFByUUIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonUserListAsZIP">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonUserListAsZIP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEArcReports">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEArcReports" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEArcReportById">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEArcReportById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEArchiveStatus">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEArchiveStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObjectEArchive">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/ObjectEArchive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEArchive">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/DeleteEArchive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEArchiveWithDate">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/DeleteEArchiveWithDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchEArchive">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SearchEArchive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEArchiveStatusByObject">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEArchiveStatusByObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchEInvoice">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SearchEInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceDocument">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEInvoiceDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceDocumentByObject">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEInvoiceDocumentByObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceAppResponsesByUUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEInvoiceAppResponsesByUUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExportInvoiceHtmlByNetleFatura">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetExportInvoiceHtmlByNetleFatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExportInvoiceHtmlByUUID">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetExportInvoiceHtmlByUUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnvelopeStatus">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEnvelopeStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_SignAndSend">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SEDP_SignAndSend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_GetDocument">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SEDP_GetDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_GetHtml">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SEDP_GetHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSystem">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckSystem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserToken">
+      <soap:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CreateUserToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Integration10Soap12" type="tns:Integration10Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFullUserList">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetFullUserList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserList">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SearchUserList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByTaxId">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetUserInfoByTaxId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserInfoByTaxId">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckUserInfoByTaxId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyPostBoxList">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCompanyPostBoxList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceHtmlByUUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetInvoiceHtmlByUUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentHtmlByUUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonDocumentHtmlByUUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceSignedXmlByUUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetInvoiceSignedXmlByUUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentSignedXmlByUUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonDocumentSignedXmlByUUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckInvoice">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDespatchAdvice">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckDespatchAdvice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCommonDocument">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckCommonDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceHtmlByNetleFatura">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetInvoiceHtmlByNetleFatura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentHtmlByNetleFatura">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonDocumentHtmlByNetleFatura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadInvoice">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/UploadInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadCommonDocument">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/UploadCommonDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadCommonDocumentXML">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/UploadCommonDocumentXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadInvoice">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/DownloadInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadCommonDocument">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/DownloadCommonDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByUUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SendEmailByUUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEMailStatusById">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEMailStatusById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastError">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetLastError" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkflowInfoByUUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetWorkflowInfoByUUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkflowInfoByGUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetWorkflowInfoByGUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptInvoiceDocument">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/AcceptInvoiceDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RejectInvoiceDocument">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/RejectInvoiceDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadUbltrWithPDFLayout">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/UploadUbltrWithPDFLayout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonDocumentPDFByUUIDs">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonDocumentPDFByUUIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonUserListAsZIP">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetCommonUserListAsZIP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEArcReports">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEArcReports" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEArcReportById">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEArcReportById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEArchiveStatus">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEArchiveStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObjectEArchive">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/ObjectEArchive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEArchive">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/DeleteEArchive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEArchiveWithDate">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/DeleteEArchiveWithDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchEArchive">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SearchEArchive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEArchiveStatusByObject">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEArchiveStatusByObject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchEInvoice">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SearchEInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceDocument">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEInvoiceDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceDocumentByObject">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEInvoiceDocumentByObject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoiceAppResponsesByUUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEInvoiceAppResponsesByUUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExportInvoiceHtmlByNetleFatura">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetExportInvoiceHtmlByNetleFatura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExportInvoiceHtmlByUUID">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetExportInvoiceHtmlByUUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnvelopeStatus">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/GetEnvelopeStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_SignAndSend">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SEDP_SignAndSend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_GetDocument">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SEDP_GetDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEDP_GetHtml">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/SEDP_GetHtml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSystem">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CheckSystem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserToken">
+      <soap12:operation soapAction="http://www.netle.com.tr/EDonusum/OrtakFatura/Ver1.0/CreateUserToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Integration10">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">e-Fatura ve e-Arsiv icin ortak yontemlerle kullanilmak uzere tasarlanmis web servis uygulamasi (ver 1.0)</wsdl:documentation>
+    <wsdl:port name="Integration10Soap" binding="tns:Integration10Soap">
+      <soap:address location="https://ws.softnet.com.tr/CommonInvoice.Web.Service/Integration10.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Integration10Soap12" binding="tns:Integration10Soap12">
+      <soap12:address location="https://ws.softnet.com.tr/CommonInvoice.Web.Service/Integration10.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
